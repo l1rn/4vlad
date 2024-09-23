@@ -1,0 +1,80 @@
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+using namespace std;
+
+void func1Array() {
+	int n;
+	cout << "Введите количество элементов в массиве от 10 до 100: "; cin >> n;
+	cin.ignore(32767, '\n');
+	if (n >= 10 && n <= 100) {
+		int minusCount = 0;
+		double* arr = new double[n];
+		srand(time(0));
+		int SizeArray = sizeof(arr[n]) / sizeof(arr[0]);
+		for (int i = 0; i < n; i++) {
+			arr[i] = (rand() % 1000 - 500) / 10.0;
+		}
+		for (int i = 0; i < n; i++) {
+			cout << arr[i] << " ";
+		}
+		cout << "Размер массива: "; cout << SizeArray;
+		for (int i = 0; i < SizeArray; i++) {
+			// Прибавляем к счетчику единицу, если выполняется условие
+			if (arr[i] > 0) {
+				minusCount++;
+				SizeArray;
+			}
+		}
+	}
+	else if (n < 10) {
+		cout << "Выше число меньше 10" << '\n';
+	}
+	else if (n > 100) {
+		cout << "Ваше число больше 100" << '\n';
+	}
+	else if (cin.fail()) {
+		cin.clear();
+		cin.ignore(32767, '\n');
+	}
+	else {
+		cout << "Ваш массив в диапозоне от 10 до 100" << '\n';
+	}
+}
+
+void func2Array() {
+
+}
+
+void getReply() {
+	setlocale(LC_CTYPE, "Russian");
+	
+	int reply; 
+	while (true) {
+		cout << "Введите номер задачи - 1, 2 или 3 для выхода: "; cin >> reply;
+		if (reply == 1) {
+			func1Array();
+		}
+		else if (reply == 2) {
+			func2Array();
+		}
+		else if (reply == 3) {
+			cout << "Программа закончена! " << '\n';
+			break;
+		}
+		else if (cin.fail()) {
+			cin.clear();
+			cin.ignore(32767, '\n');
+			cout << "Неверный ввод! Введите еще раз" << '\n';
+		}
+		else {
+			cout << "Неверный ввод! Введите еще раз" << '\n';
+		}
+
+	}
+}
+
+int main() {
+	getReply();
+	return 0;
+}
