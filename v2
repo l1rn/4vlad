@@ -1,0 +1,146 @@
+#include <iostream>
+#include <cstdlib>
+#include <iomanip>
+using namespace std;
+
+void func1Array() {
+	setlocale(LC_CTYPE, "Russian");
+	int n;
+	cout << "Введите количество элементов в массиве от 10 до 100: "; cin >> n;
+
+	cin.ignore(32767, '\n');
+
+	if (n <= 100 && n >= 10) {
+		int minusCount = 0;
+		double* arr = new double[n];
+		srand(time(0));
+		for (int i = 0; i < n; i++) {
+			arr[i] = (rand() % 1000 - 500) / 10.0;
+		}
+		cout << "isxodnaya matritsa:" << '\n';
+		for (int i = 0; i < n; i++) {
+			cout << arr[i] << setw(8);
+		}
+		cout << endl; 
+		cout << endl;
+		cout << "Позиции на которых находяться отрицательные числа: " << '\n';
+		for (int i = 0; i < n; ++i) {
+			if (arr[i] < n) {
+				cout << setw(7) << i;
+			}
+		}
+		
+
+		for (int i = 0; i < n; i++) {
+			if (arr[i] < 0) {
+				minusCount++;
+			}
+		}
+		
+		cout << endl;
+		cout << "kolichestvo otritsatelnix positsiy: " << minusCount << '\n';
+		
+		cout << endl;
+		delete[] arr;
+	}
+	
+	else if (cin.fail()) {
+		cin.clear();
+		cin.ignore(32767, '\n');
+		cout << "Неверный ввод! Попробуйте еще." << '\n';
+	}
+	else if(!(n <= 100 && n >= 10)){
+		cout << "Ваше число не в диапозоне от 10 до 100" << '\n';
+	}
+	
+}
+
+void func2Array() {
+	setlocale(LC_CTYPE, "Russian");
+	int rows;
+	int cols;
+	cout << "vvedite dlinu pryamougolnika целым числом от 1 до 9: "; cin >> rows;
+	
+	if (rows >= 1 && rows < 10) {
+		cout << "vvedite visotu prymougolnika целым числом от 1 до 9: "; cin >> cols;
+
+		
+		if (cols >= 1 && cols < 10) {
+			int** arrRC = new int*[rows];
+			
+
+			for (int i = 0; i < rows; ++i) {
+				arrRC[i] = new int[cols];
+			}
+			srand(time(0));
+
+			for (int i = 0; i < rows; ++i) {
+				for (int j = 0; j < cols; ++j) {
+					arrRC[i][j] = rand() % 101;
+				}
+				
+			}
+			cout << "isxodnaya matritsa: " << '\n';
+			for (int i = 0; i < rows; i++) {
+				for (int j = 0; j < cols; j++) {
+					cout << setw(5) << arrRC[i][j];
+				}
+				cout << endl;
+			}
+			
+			for (int i = 0; i < rows; ++i) {
+				delete[] arrRC[i];
+			}
+
+			delete[] arrRC;
+		}
+		else if (cin.fail()) {
+			cin.clear();
+			cin.ignore(32767, '\n');
+			cout << "Неверный ввод! Попробуйте еще." << '\n';
+		}
+		else if (!(cols >= 1 && cols < 10)) {
+			cout << "Ваше число не в диапозоне от 1 до 9" << '\n';
+		}
+	}
+	else if (cin.fail()) {
+		cin.clear();
+		cin.ignore(32767, '\n');
+		cout << "Неверный ввод! Попробуйте еще." << '\n';
+	}
+	else if (!(rows >= 1 && rows < 10)) {
+		cout << "Ваше число не в диапозоне от 1 до 9" << '\n';
+	}
+}
+
+void getReply() {
+	setlocale(LC_CTYPE, "Russian");
+
+	int reply;
+	while (true) {
+		cout << "Введите номер задачи - 1, 2 или 3 для выхода: "; cin >> reply;
+
+		cin.ignore(32767, '\n');
+		if (reply == 1) {
+			func1Array();
+		}
+		else if (reply == 2) {
+			func2Array();
+		}
+		else if (reply == 3) {
+			cout << "Программа закончена! " << '\n';
+			break;
+		}
+		else if (cin.fail()) {
+			cin.clear();
+			cin.ignore(32767, '\n');
+			cout << "Неверный ввод! Введите еще раз" << '\n';
+		}
+
+	}
+}
+
+int main() {
+	getReply();
+	return 0;
+}
